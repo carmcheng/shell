@@ -42,6 +42,10 @@ int main() {
         }
         args[n] = NULL;
         
+        // If exit, break out
+        if (strcmp(args[0], "exit") == 0) {
+            return 0;
+        }
         
         /***** Fork starts *****/
         int rc = fork();
@@ -57,11 +61,6 @@ int main() {
                     perror("chdir");
                     return -1;
                 }
-                
-            // If args[0] is exit, then it ends child and then breaks out of
-            // while loop in parent
-            } else if (strcmp(args[0], "exit") == 0) {
-                return 0;
             
             // If '>' is found in the command
             } else if (flag == 1) {
